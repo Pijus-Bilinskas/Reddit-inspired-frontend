@@ -1,0 +1,9 @@
+.GroupCard_padding {
+    display: flex;
+    flex-direction: column;
+    padding-top: 2rem;
+    padding-bottom: 5rem;
+    background-color: var(--primary-backround-color);
+  }
+  
+ 

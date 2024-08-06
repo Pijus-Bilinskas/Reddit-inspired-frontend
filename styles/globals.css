@@ -5,6 +5,10 @@
   --secondary-backround-color: rgb(184, 184, 184);
 }
 
+body{
+  background-color: lightgray;
+}
+
 * {
   margin: 0;
   text-decoration: none;
