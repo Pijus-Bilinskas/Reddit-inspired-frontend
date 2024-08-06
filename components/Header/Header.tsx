@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import styles from "./Header.module.css";
 import Link from "next/link";
 import burgerBtn from "../../assets/burger-menu-svgrepo-com.svg";
-import { link } from "fs";
 
 type LinkType = {
     id: number;

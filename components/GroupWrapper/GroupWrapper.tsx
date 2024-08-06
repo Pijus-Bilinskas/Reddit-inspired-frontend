@@ -7,7 +7,8 @@ type GroupCardWrapper = {
     groups: GroupType[];
 };
 
-const GroupCardWrapper = ({ groups }: GroupCardWrapper) => {
+const GroupCardsWrapper = ({ groups }: GroupCardWrapper) => {
+    console.log('GroupCardWrapper groups:', groups);
     return(
         <div className={styles.GroupCard_padding}>
             {groups.map((group) => (
@@ -22,4 +23,4 @@ const GroupCardWrapper = ({ groups }: GroupCardWrapper) => {
     )
 }
 
-export default GroupCardWrapper;
+export default GroupCardsWrapper;
