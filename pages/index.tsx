@@ -29,7 +29,7 @@ const Index = () => {
   }, []);
 
   return(
-    <PageTemplate>
+   <PageTemplate>
     {groups && <GroupCardsWrapper groups={groups} />}
     </PageTemplate>
   )

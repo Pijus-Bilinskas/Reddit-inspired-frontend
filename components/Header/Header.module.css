@@ -58,7 +58,7 @@
       justify-content: center;
       background-color: var(--secondary-backround-color);
       position: fixed;
-      width: 100%;
+      width: 20%;
       height: calc(100vh - 80px);
       bottom: -100%;
       left: 0;
