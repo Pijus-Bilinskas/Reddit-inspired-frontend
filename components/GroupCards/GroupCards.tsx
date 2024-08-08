@@ -10,7 +10,7 @@ type GroupCardProps = {
 
 const GroupCard = ({ id, name, created_at}: GroupCardProps) => {
     return(
-        <Link href={`/group/${id}`} className={styles.Group_card_wrapper}>
+        <Link href={`/posts/${id}`} className={styles.Group_card_wrapper}>
             <div className={styles.infoCard}>
                 <h2>{name}</h2>
                 <h4>{created_at}</h4>

@@ -1,0 +1,15 @@
+.PostCard__padding {
+    display: flex;
+    flex-direction: column;
+    padding-top: 2rem;
+    padding-bottom: 5rem;
+    background-color: var(--primary-backround-color);
+}
+
+.group__padding {
+    padding: 2rem;
+}
+
+.group__padding h2 {
+     font-size: 25px;
+}

@@ -1,0 +1,34 @@
+.PostCard__padding{
+    margin: auto;
+    width: 60%;
+}
+
+.PostCard {
+    padding: 16px;
+    margin-bottom: 10px;
+    color: var(--primary-text-color);
+    border: 1px solid #313131;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.PostCard:not(:last-child){
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.PostCard:hover{
+    background-color: rgb(82, 82, 82);
+}
+
+.PostCard h2 {
+    font-size: 35px;
+}
+
+.PostCard h4{
+    font-size: 11px;
+}
+
+.PostCard p {
+    font-size: 8px;
+}

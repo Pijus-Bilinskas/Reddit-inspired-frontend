@@ -8,7 +8,6 @@ type GroupCardWrapper = {
 };
 
 const GroupCardsWrapper = ({ groups }: GroupCardWrapper) => {
-    console.log('GroupCardWrapper groups:', groups);
     return(
         <div className={styles.GroupCard_padding}>
             {groups.map((group) => (
