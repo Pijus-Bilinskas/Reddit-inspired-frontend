@@ -1,0 +1,12 @@
+.main{
+    padding: 0.5rem;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.warning {
+    background-color: rgb(163, 0, 0);
+    color: white;
+    font-weight: 600;
+}
