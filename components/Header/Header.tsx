@@ -6,7 +6,6 @@ import burgerBtn from "../../assets/burger-menu-svgrepo-com.svg";
 type LinkType = {
     id: number;
     title: string;
-    href: string;
 }
 
 type HeaderProps = {
@@ -27,7 +26,7 @@ const Header = ({ WebTitle, links }: HeaderProps) => {
                 <ul className={styles.header__links}>
                     {links.map((link) => {
                         return(
-                            <a href={link.href} key={link.id}>
+                            <a key={link.id}>
                                 {link.title}
                             </a>
                         )
@@ -44,7 +43,7 @@ const Header = ({ WebTitle, links }: HeaderProps) => {
                 <ul className={styles.header__mobileMenu_links}>
                     {links.map((link) => {
                         return(
-                            <a href={link.href} key={link.id}>{link.title}</a>
+                            <a  key={link.id}>{link.title}</a>
                         )
                     })}
                 </ul>
