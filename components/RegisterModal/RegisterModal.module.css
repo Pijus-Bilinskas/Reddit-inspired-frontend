@@ -3,10 +3,9 @@ body.active_modal {
 }
 
 .btn_modal {
-    padding: 10px 20px;
-    display: block;
-    margin: 100px auto 0;
-    font-size: 18px;
+    border: none;
+    cursor: pointer;
+    color: rgb(16, 16, 131);
 }
 
 .modal, .overlay {
@@ -29,13 +28,11 @@ body.active_modal {
     transform: translate(-50%, -50%);
     line-height: 1.4;
     background: #f1f1f1;
-    padding: 30px 28px;
+    padding: 48px 28px 25px;
     border-radius: 3px;
     max-width: 600px;
     min-width: 300px;
 }
-
-
 
 .close_modal {
     position: absolute;
@@ -63,10 +60,6 @@ body.active_modal {
     box-sizing: border-box;
 }
 
-.modal_input:first-child{
-    margin-top: 20px;
-}
-
 .modal_submit_button {
     width: 100%;
     padding: 10px;
@@ -81,4 +74,3 @@ body.active_modal {
     color: red;
     margin-top: 10px;
 }
-
