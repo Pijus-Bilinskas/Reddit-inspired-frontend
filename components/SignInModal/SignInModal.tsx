@@ -2,7 +2,6 @@ import React, {useState, useEffect} from "react";
 import styles from "./SignInModal.module.css";
 import axios from "axios";
 import Cookies from "js-cookie";
-import RegisterFormModal from "../RegisterModal/RegisterModal";
 
 
 const LoginFormModal = () => {
@@ -12,14 +11,9 @@ const LoginFormModal = () => {
     const [isBadData, setBadData] = useState(false)
     const [modal, setModal] = useState(false)
 
-    
     const toggleModal = () => {
         setModal(!modal)
     };
-    
-    const handleOpenRegisterModal = () => {
-        toggleModal()
-    }    
 
 
     useEffect(() => {
@@ -64,7 +58,7 @@ const LoginFormModal = () => {
     return(
         <>
         <button onClick={toggleModal} className={styles.btn_modal}>
-            Login
+            Log in
         </button>
 
         {modal && (
@@ -94,9 +88,6 @@ const LoginFormModal = () => {
                     <div className={styles.modal_error}>Provided incorrect data</div>
                 )}
                 <button onClick={toggleModal} className={styles.close_modal}>Close</button>
-                <p>new to this?<span>
-                    <RegisterFormModal/>
-                    </span></p>
                     </div>
                 </div>
             </div>

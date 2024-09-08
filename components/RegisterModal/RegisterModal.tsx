@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styles from "./RegisterModal.module.css";
 import axios from "axios";
+import exp from "constants";
 
 
 const RegisterFormModal = () => {
@@ -54,8 +55,8 @@ const RegisterFormModal = () => {
 
     return(
         <>
-        <button onClick={toggleModal} className={styles.btn_modal} >
-        Sign up
+        <button onClick={toggleModal} className={styles.btn_modal}>
+        Register
         </button>
 
         {modal && (

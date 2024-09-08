@@ -1,7 +1,8 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import styles from "./PostPage.module.css";
 import Link from "next/link";
 import axios from "axios";
+import Cookies from "js-cookie";
 
 
 type PostCardProps = {
@@ -15,14 +16,24 @@ type PostCardProps = {
 const PostCard = ({ id, title, content, created_at, initialReactionCount}: PostCardProps) => {
     const [reactionCount, setReactionCount] = useState(initialReactionCount);
 
-    const handleLike = async () => {
-        setReactionCount(reactionCount + 1)
-        await axios.post(`${process.env.SERVER_URL}//post/${id}/react`)
+    const headers = {
+        authorization: Cookies.get("jwt_token")
     }
 
+    const handleLike = async () => {
+     await axios.post(`${process.env.SERVER_URL}/post/${id}/react`,
+            { reaction_type: "like" },
+            { headers}
+        )
+    }
+    // make it change the color of the like or dislike according to what you have pressed 
+    // and then fix the like and dislike number 
+
     const handleDislike = async () => {
-        setReactionCount(reactionCount - 1)
-        await axios.post(`${process.env.SERVER_URL}//post/${id}/react`)
+        await axios.post(`${process.env.SERVER_URL}/post/${id}/react`,
+            { reaction_type: "dislike" },
+            {headers}
+        )
     }
 
 
