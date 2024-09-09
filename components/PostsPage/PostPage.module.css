@@ -1,15 +1,19 @@
 .PostCard__padding{
     margin: auto;
-    width: 60%;
     border: 1px solid black;
     padding: 1rem;
+    width: 50%;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     margin-bottom: 0.2rem;
 }
 
+.PostCard_padding:hover{
+    background-color: rgb(133, 133, 133);
+}
+
 .PostCard {
-    padding: 16px;
+    padding: 2rem;
     color: var(--primary-text-color);
 }
 
@@ -18,12 +22,9 @@
     margin-bottom: 0;
 }
 
-.PostCard:hover{
-    background-color: rgb(82, 82, 82);
-}
 
 .PostCard h2 {
-    font-size: 35px;
+    font-size: 45px;
 }
 
 .PostCard h4{
@@ -32,4 +33,41 @@
 
 .PostCard p {
     font-size: 8px;
+}
+
+.Reaction_buttons{
+    display: flex;
+    align-items: center;
+    background-color: gray;
+}
+
+.Like_button{
+    margin-right: 1rem;
+}
+
+.post_rating_selected > .Like_button,
+.post_rating_selected > .reaction_count {
+    color: red;
+    background-color: red;
+}
+
+
+.post_rating:not(.post_rating_selected) > .post_rating-button:hover {
+    color: black;
+}
+
+.liked_post{
+    color: red
+}
+
+.disliked_post{
+    color: blue;
+}
+
+.active_like{
+    background-color: red;
+}
+
+.active_dislike {
+    background-color: blue;
 }

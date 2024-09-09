@@ -15,26 +15,81 @@ type PostCardProps = {
 
 const PostCard = ({ id, title, content, created_at, initialReactionCount}: PostCardProps) => {
     const [reactionCount, setReactionCount] = useState(initialReactionCount);
+    const [userReaction, setUserReaction] = useState<"none"|"like"|"dislike">("none")
 
     const headers = {
         authorization: Cookies.get("jwt_token")
     }
-
-    const handleLike = async () => {
-     await axios.post(`${process.env.SERVER_URL}/post/${id}/react`,
-            { reaction_type: "like" },
-            { headers}
-        )
-    }
-    // make it change the color of the like or dislike according to what you have pressed 
-    // and then fix the like and dislike number 
-
-    const handleDislike = async () => {
+    
+    
+    const handleReaction = async (reactionType: "like" | "dislike") => {
+        try{
         await axios.post(`${process.env.SERVER_URL}/post/${id}/react`,
-            { reaction_type: "dislike" },
-            {headers}
-        )
+            { reaction_type: reactionType },
+            { headers}
+        );
+        if(reactionType === userReaction) {
+            setUserReaction("none");
+            setReactionCount((prevCount) => prevCount + (reactionType === "like" ? -1 : 1 ))
+        } else {
+            if(userReaction === "like") {
+                setReactionCount((prevCount) => prevCount - 1)
+            } else if (userReaction === "dislike") {
+                setReactionCount((prevCount) => prevCount + 1)
+            }
+            setReactionCount((prevCount)  => prevCount + (reactionType === "like" ? 1 : -1))
+            setUserReaction(reactionType)
+            }
+        
+         } catch (err) {
+        console.log("Error occurred while reacting", err)
+       }
     }
+
+
+
+    // useEffect(() => {
+    //     if (userReaction === "like"){
+    //       if(document.body.classList.contains("post_rating_selected")){
+    //         document.body.classList.remove("post_rating_selected")
+    //         setReactionCount((prevCount) => prevCount - 1)
+    //       } else {
+    //         document.body.classList.add("post_rating_selected")
+    //         setReactionCount((prevCount) => prevCount + 1)
+    //       }
+    //     } if (userReaction === "dislike") {
+    //         if(document.body.classList.contains("post_rating_selected")){
+    //             document.body.classList.remove("post_rating_selected")
+    //             setReactionCount((prevCount) => prevCount + 1)
+    //         } else {
+    //             document.body.classList.add("post_rating_selected")
+    //             setReactionCount((prevCount) => prevCount - 1)
+    //         }
+    //     }
+    // }, [userReaction]);
+
+
+
+
+
+    // const handleLike = async () => {
+    //  await axios.post(`${process.env.SERVER_URL}/post/${id}/react`,
+    //         { reaction_type: "like" },
+    //         { headers}
+    //     )
+    // }
+  
+
+    // const handleDislike = async () => {
+    //     await axios.post(`${process.env.SERVER_URL}/post/${id}/react`,
+    //         { reaction_type: "dislike" },
+    //         {headers}
+    //     )
+    // }
+
+
+
+
 
 
     return(
@@ -45,9 +100,14 @@ const PostCard = ({ id, title, content, created_at, initialReactionCount}: PostC
             <h4>{content}</h4>
         </Link>
             <div className={styles.Reaction_buttons}>
-            <button onClick={handleLike} className={styles.Like_button}>👆</button>
-            <span>{reactionCount}</span>
-            <button onClick={handleDislike} className={styles.Dislike_button}>👇</button>
+            <button onClick={() => handleReaction("like")} 
+            className={`${styles.Like_button} ${userReaction === "like" ? styles.active_like : ""}`}>👆</button>
+            <span  className={`${styles.reaction_count} ${
+                        userReaction === "like" ? styles.liked_post : userReaction === "dislike" ? styles.disliked_post : ""
+                    }`}
+            >{reactionCount}</span>
+            <button onClick={() => handleReaction("dislike")} 
+            className={`${styles.Dislike_button} ${userReaction === "dislike" ? styles.active_dislike : ""}`}>👇</button>
             </div>
         </div>
     )
