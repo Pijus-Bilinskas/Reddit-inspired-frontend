@@ -28,7 +28,7 @@ const PostCardsWrapper = ({ group ,posts }: PostCardWrapper) => {
                         title={post.title}
                         content={post.content}
                         created_at={post.created_at}
-                        initialReactionCount={initialReactionCount} 
+                        initialReactionCount={initialReactionCount}
                     />
                 );
             })}

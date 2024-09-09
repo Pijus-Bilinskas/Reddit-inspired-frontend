@@ -3,6 +3,7 @@ import styles from "./PostPage.module.css";
 import Link from "next/link";
 import axios from "axios";
 import Cookies from "js-cookie";
+import { useRouter } from "next/router";
 
 
 type PostCardProps = {
@@ -16,11 +17,32 @@ type PostCardProps = {
 const PostCard = ({ id, title, content, created_at, initialReactionCount}: PostCardProps) => {
     const [reactionCount, setReactionCount] = useState(initialReactionCount);
     const [userReaction, setUserReaction] = useState<"none"|"like"|"dislike">("none")
+    const currentUserId = Cookies.get("user_id");
+    const router = useRouter();
 
     const headers = {
         authorization: Cookies.get("jwt_token")
     }
     
+   
+
+
+
+    const fetchUserReaction = async () => {
+        try{
+            const response = await axios.get(`${process.env.SERVER_URL}/group/${router.query.id}/posts`)
+            console.log(response)
+            const { user_reaction } = response.data.posts.reactions;
+
+            if(user_reaction === "like" || user_reaction === "dislike"){
+                setUserReaction(user_reaction)
+            }
+        } catch (err) {
+            console.log("error fetching user reactions", err)
+        }
+    }
+
+
     
     const handleReaction = async (reactionType: "like" | "dislike") => {
         try{
@@ -46,27 +68,15 @@ const PostCard = ({ id, title, content, created_at, initialReactionCount}: PostC
        }
     }
 
+    useEffect(() => {
+        fetchUserReaction();
+    }, [])
 
 
-    // useEffect(() => {
-    //     if (userReaction === "like"){
-    //       if(document.body.classList.contains("post_rating_selected")){
-    //         document.body.classList.remove("post_rating_selected")
-    //         setReactionCount((prevCount) => prevCount - 1)
-    //       } else {
-    //         document.body.classList.add("post_rating_selected")
-    //         setReactionCount((prevCount) => prevCount + 1)
-    //       }
-    //     } if (userReaction === "dislike") {
-    //         if(document.body.classList.contains("post_rating_selected")){
-    //             document.body.classList.remove("post_rating_selected")
-    //             setReactionCount((prevCount) => prevCount + 1)
-    //         } else {
-    //             document.body.classList.add("post_rating_selected")
-    //             setReactionCount((prevCount) => prevCount - 1)
-    //         }
-    //     }
-    // }, [userReaction]);
+
+
+
+
 
 
 
@@ -86,9 +96,6 @@ const PostCard = ({ id, title, content, created_at, initialReactionCount}: PostC
     //         {headers}
     //     )
     // }
-
-
-
 
 
 
