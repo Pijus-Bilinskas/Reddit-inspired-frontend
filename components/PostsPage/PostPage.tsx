@@ -12,90 +12,88 @@ type PostCardProps = {
     content: string;
     created_at: string;
     initialReactionCount: number;
+    userReaction: "none" | "like" | "dislike";
 }
 
-const PostCard = ({ id, title, content, created_at, initialReactionCount}: PostCardProps) => {
+const PostCard = ({ id, title, content, created_at, initialReactionCount, userReaction: initialUserReaction}: PostCardProps) => {
     const [reactionCount, setReactionCount] = useState(initialReactionCount);
-    const [userReaction, setUserReaction] = useState<"none"|"like"|"dislike">("none")
+    const [userReaction, setUserReaction] = useState<"none"|"like"|"dislike">(initialUserReaction)
     const currentUserId = Cookies.get("user_id");
-    const router = useRouter();
 
     const headers = {
         authorization: Cookies.get("jwt_token")
     }
     
-   
 
 
-
-    const fetchUserReaction = async () => {
-        try{
-            const response = await axios.get(`${process.env.SERVER_URL}/group/${router.query.id}/posts`)
-            console.log(response)
-            const { user_reaction } = response.data.posts.reactions;
-
-            if(user_reaction === "like" || user_reaction === "dislike"){
-                setUserReaction(user_reaction)
-            }
-        } catch (err) {
-            console.log("error fetching user reactions", err)
-        }
-    }
-
-
-    
-    const handleReaction = async (reactionType: "like" | "dislike") => {
-        try{
+   const handleReaction = async (reactionType: "like" | "dislike") => {
+    try{
         await axios.post(`${process.env.SERVER_URL}/post/${id}/react`,
             { reaction_type: reactionType },
-            { headers}
+            { headers }
         );
         if(reactionType === userReaction) {
             setUserReaction("none");
-            setReactionCount((prevCount) => prevCount + (reactionType === "like" ? -1 : 1 ))
+            setReactionCount((prevCount) => prevCount + (reactionType === "like" ? -1 : 1))
         } else {
-            if(userReaction === "like") {
-                setReactionCount((prevCount) => prevCount - 1)
+            if(userReaction === "like"){
+                setReactionCount((prevCount)=> prevCount - 1);
             } else if (userReaction === "dislike") {
-                setReactionCount((prevCount) => prevCount + 1)
-            }
-            setReactionCount((prevCount)  => prevCount + (reactionType === "like" ? 1 : -1))
+                setReactionCount((prevCount) => prevCount + 1);
+            } setReactionCount((prevCount) => prevCount + (reactionType === "like" ? 1 : -1))
             setUserReaction(reactionType)
-            }
-        
-         } catch (err) {
+        }
+    } catch (err) {
         console.log("Error occurred while reacting", err)
-       }
     }
-
-    useEffect(() => {
-        fetchUserReaction();
-    }, [])
+   };
 
 
 
+    // const fetchUserReaction = async () => {
+    //     try{
+    //         const response = await axios.get(`${process.env.SERVER_URL}/group/${router.query.id}/posts`)
+    //         console.log(response)
+    //         const { user_reaction } = response.data.posts.reactions;
 
-
-
-
-
-
-
-
-    // const handleLike = async () => {
-    //  await axios.post(`${process.env.SERVER_URL}/post/${id}/react`,
-    //         { reaction_type: "like" },
-    //         { headers}
-    //     )
+    //         if(user_reaction === "like" || user_reaction === "dislike"){
+    //             setUserReaction(user_reaction)
+    //         }
+    //     } catch (err) {
+    //         console.log("error fetching user reactions", err)
+    //     }
     // }
-  
 
-    // const handleDislike = async () => {
+
+    
+    // const handleReaction = async (reactionType: "like" | "dislike") => {
+    //     try{
     //     await axios.post(`${process.env.SERVER_URL}/post/${id}/react`,
-    //         { reaction_type: "dislike" },
-    //         {headers}
-    //     )
+    //         { reaction_type: reactionType },
+    //         { headers}
+    //     );
+    //     if(reactionType === userReaction) {
+    //         setUserReaction("none");
+    //         setReactionCount((prevCount) => prevCount + (reactionType === "like" ? -1 : 1 ))
+    //     } else {
+    //         if(userReaction === "like") {
+    //             setReactionCount((prevCount) => prevCount - 1)
+    //         } else if (userReaction === "dislike") {
+    //             setReactionCount((prevCount) => prevCount + 1)
+    //         }
+    //         setReactionCount((prevCount)  => prevCount + (reactionType === "like" ? 1 : -1))
+    //         setUserReaction(reactionType)
+    //         }
+        
+    //      } catch (err) {
+    //     console.log("Error occurred while reacting", err)
+    //    }
     // }
+
+    // useEffect(() => {
+    //     fetchUserReaction();
+    // }, [])
+
 
 
 
