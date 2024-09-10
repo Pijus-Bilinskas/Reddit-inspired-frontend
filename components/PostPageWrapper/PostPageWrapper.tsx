@@ -34,7 +34,19 @@ const PostCardsWrapper = ({ group ,posts }: PostCardWrapper) => {
     return(
         <div className={styles.PostCard__padding}>
             <div className={styles.group__padding}>
-            <h2>{group.name}</h2>
+                <div className={styles.group_image_large}>
+                    <img src={group.image} alt="group image" />
+                </div>
+                <div className={styles.group_info}>
+                    <div className={styles.group_title_img_container}>
+                        <img src={group.image} alt="group image" />
+                         <h2>r/{group.name}</h2>
+                    </div>
+                    <div className={styles.group_action_buttons_container}>
+                        <button><span>+</span>Create post</button>
+                        <button>Join</button>
+                    </div>
+                </div>
             </div>
             {posts.map((post) => {
                 const initialReactionCount = post.reactions.reduce((acc, reaction) => {

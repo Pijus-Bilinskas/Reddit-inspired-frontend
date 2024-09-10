@@ -18,7 +18,6 @@ type PostCardProps = {
 const PostCard = ({ id, title, content, created_at, initialReactionCount, userReaction: initialUserReaction}: PostCardProps) => {
     const [reactionCount, setReactionCount] = useState(initialReactionCount);
     const [userReaction, setUserReaction] = useState<"none"|"like"|"dislike">(initialUserReaction)
-    const currentUserId = Cookies.get("user_id");
 
     const headers = {
         authorization: Cookies.get("jwt_token")
