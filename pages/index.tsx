@@ -7,7 +7,6 @@ import axios from "axios";
 import GroupCardsWrapper from ".././components/GroupWrapper/GroupWrapper";
 
 const Index = () => {
-  console.log("working")
   const [groups, setGroups] = useState<GroupType[] | null>(null);
   const fetchGroups = async () => {
     try{
