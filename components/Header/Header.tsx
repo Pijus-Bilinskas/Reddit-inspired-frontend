@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styles from "./Header.module.css";
 import Link from "next/link";
 import burgerBtn from "../../assets/burger-menu-svgrepo-com.svg";
-import LoginFormModal from "../SignInModal/SignInModal";
+import AuthModal from "../AuthModal/AuthModal";
 
 type LinkType = {
     id: number;
@@ -25,7 +25,7 @@ const Header = ({ WebTitle, links }: HeaderProps) => {
 
             <nav>
                 <ul className={styles.header__links}>
-                    <LoginFormModal/>
+                    <AuthModal />
                 </ul>
             </nav>
 
