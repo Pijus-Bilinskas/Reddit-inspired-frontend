@@ -19,6 +19,9 @@
 
 .group_image_large{
     position: relative;
+    background-color: var(--secondary-backround-color);
+    height: 150px;
+    border-radius: 10px;
 }
 
 
@@ -47,10 +50,11 @@
     height: 70px;
     width: 70px;
     border-radius: 50%;
-    border: 5px solid gray;
+    background-color: var(--secondary-backround-color);
+    border: 5px solid var(--primary-backround-color);
     top: -40px;
     left: 15%;
-    z-index: 10;
+    z-index: 1;
 }
 
 .group_title_img_container h2{
