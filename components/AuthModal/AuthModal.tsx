@@ -51,6 +51,7 @@ const AuthModal = () => {
             if(response.status === 200) {
                 setBadData(false)
                 Cookies.set("jwt_token", response.data.jwt_token)
+                Cookies.set("joined_groups", response.data.joined_groups)
                 toggleModal()
             }
         } catch (err) {

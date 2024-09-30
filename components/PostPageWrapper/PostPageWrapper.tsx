@@ -5,6 +5,7 @@ import styles from "./PostPageWrapper.module.css";
 import { GroupType } from "@/types/group";
 import Cookies from "js-cookie";
 import { jwtDecode } from "jwt-decode";
+import Link from "next/link";
 
 
 type PostCardWrapper = {
@@ -43,7 +44,7 @@ const PostCardsWrapper = ({ group ,posts }: PostCardWrapper) => {
                          <h2>r/{group.name}</h2>
                     </div>
                     <div className={styles.group_action_buttons_container}>
-                        <button><span>+</span>Create post</button>
+                       <Link href={`/submit`}><button><span>+</span>Create post</button></Link>
                         <button>Join</button>
                     </div>
                 </div>
