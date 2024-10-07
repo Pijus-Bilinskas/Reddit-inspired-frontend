@@ -9,13 +9,16 @@ import { useRouter } from "next/router";
 type PostCardProps = {
     id: string;
     title: string;
-    content: string;
     created_at: string;
+    content_type: "text" | "image" | "link";
+    content_text: string;
+    content_image: string;
+    content_link: string;
     initialReactionCount: number;
     userReaction: "none" | "like" | "dislike";
 }
 
-const PostCard = ({ id, title, content, created_at, initialReactionCount, userReaction: initialUserReaction}: PostCardProps) => {
+const PostCard = ({ id, title, content_type, created_at, content_text, content_image, content_link, initialReactionCount, userReaction: initialUserReaction}: PostCardProps) => {
     const [reactionCount, setReactionCount] = useState(initialReactionCount);
     const [userReaction, setUserReaction] = useState<"none"|"like"|"dislike">(initialUserReaction)
 
@@ -47,52 +50,22 @@ const PostCard = ({ id, title, content, created_at, initialReactionCount, userRe
     }
    };
 
-
-
-    // const fetchUserReaction = async () => {
-    //     try{
-    //         const response = await axios.get(`${process.env.SERVER_URL}/group/${router.query.id}/posts`)
-    //         console.log(response)
-    //         const { user_reaction } = response.data.posts.reactions;
-
-    //         if(user_reaction === "like" || user_reaction === "dislike"){
-    //             setUserReaction(user_reaction)
-    //         }
-    //     } catch (err) {
-    //         console.log("error fetching user reactions", err)
-    //     }
-    // }
-
-
-    
-    // const handleReaction = async (reactionType: "like" | "dislike") => {
-    //     try{
-    //     await axios.post(`${process.env.SERVER_URL}/post/${id}/react`,
-    //         { reaction_type: reactionType },
-    //         { headers}
-    //     );
-    //     if(reactionType === userReaction) {
-    //         setUserReaction("none");
-    //         setReactionCount((prevCount) => prevCount + (reactionType === "like" ? -1 : 1 ))
-    //     } else {
-    //         if(userReaction === "like") {
-    //             setReactionCount((prevCount) => prevCount - 1)
-    //         } else if (userReaction === "dislike") {
-    //             setReactionCount((prevCount) => prevCount + 1)
-    //         }
-    //         setReactionCount((prevCount)  => prevCount + (reactionType === "like" ? 1 : -1))
-    //         setUserReaction(reactionType)
-    //         }
-        
-    //      } catch (err) {
-    //     console.log("Error occurred while reacting", err)
-    //    }
-    // }
-
-    // useEffect(() => {
-    //     fetchUserReaction();
-    // }, [])
-
+   const renderContent = () => {
+    switch (content_type) {
+        case "text":
+            return <p>{content_text}</p>;
+        case "image":
+            return (
+                <img
+                    src={`data:image/jpeg;base64,${content_image}`}
+                    alt="Post content"
+                    className={styles.post_content_image}/>) ;
+        case "link":
+            return <a href={content_link} >{content_link}</a>
+        default: 
+            return null 
+    }
+   }
 
 
 
@@ -101,7 +74,7 @@ const PostCard = ({ id, title, content, created_at, initialReactionCount, userRe
         <Link href={`/comments/${id}`}  className={styles.PostCard}>
             <h2>{title}</h2>
             <p>{created_at}</p>
-            <h4>{content}</h4>
+            <div>{renderContent()}</div>
         </Link>
             <div className={styles.Reaction_buttons}>
             <button onClick={() => handleReaction("like")} 

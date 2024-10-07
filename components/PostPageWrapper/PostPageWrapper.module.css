@@ -71,6 +71,7 @@
     padding: 8px;
     border-radius: 10px;
     font-size: 22px;
+    cursor: pointer;
 }
 
 .group_action_buttons_container span {

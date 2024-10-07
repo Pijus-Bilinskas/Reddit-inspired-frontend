@@ -51,7 +51,7 @@ const AuthModal = () => {
             if(response.status === 200) {
                 setBadData(false)
                 Cookies.set("jwt_token", response.data.jwt_token)
-                Cookies.set("joined_groups", response.data.joined_groups)
+                Cookies.set("joined_groups", JSON.stringify(response.data.joined_groups))
                 toggleModal()
             }
         } catch (err) {
@@ -73,7 +73,7 @@ const AuthModal = () => {
         setError(false)
         try{
             const response = await axios.post(
-                `${process.env.SERVER_URL}/register`)
+                `${process.env.SERVER_URL}/register`, registerBody)
             if( response.status === 200) {
                 setBadData(false)
                 toggleModal()

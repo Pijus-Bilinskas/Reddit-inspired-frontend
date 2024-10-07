@@ -2,11 +2,15 @@ import styles from "./PostSubmit.module.css"
 import React,{ useState } from "react"
 import Cookies from "js-cookie"
 import axios from "axios"
-import exp from "constants"
 import { read } from "fs"
+import { GroupType } from "@/types/group"
+import { jwtDecode } from "jwt-decode"
 
+type GroupSelected = {
+    groups: GroupType[];
+}
 
-const CreatePost = () => {
+const CreatePost = ({groups}: GroupSelected) => {
     const [selectedGroup, setSelectedGroup] = useState("")
     const [contentType, setContentType] = useState("text");
     const [title, setTitle] = useState("");
@@ -33,22 +37,25 @@ const CreatePost = () => {
         reader.readAsDataURL(file);
     };
 
+
     const submitPost = async () => {
         try{
-            const post = {
-                title,
+          
+            const post: any = {
+                title: title,
+                group_id: selectedGroup,
+                user_id: getUserIdfromToken(),
                 content_type: contentType,
             };
 
             if(contentType === "text") {
-                post.content_type = textContent;
+                post.content_text = textContent;
             } else if(contentType === "image") {
-                post.content_type = imageContent
+                post.content_image = imageContent
             } else if(contentType === "link") {
-                post.content_type = linkContent
+                post.content_link = linkContent
             }
-
-            await axios.post(`${process.env.SERVER_URL}/submitpost endpoint`,
+          await axios.post(`${process.env.SERVER_URL}/group/${selectedGroup}/posts`,
                 post,
                 { headers }
             )
@@ -58,8 +65,25 @@ const CreatePost = () => {
             setLinkContent("");
             setImageContent("");
             setContentType("text")
+            window.location.href = `/posts/${selectedGroup}`
         } catch (err) {
             console.log("An error occured submitting the post" ,err)
+        }
+    };
+
+
+    const getUserIdfromToken = () => {
+        const token = Cookies.get(`jwt_token`);
+        if (!token) {
+            console.log("Token not found");
+            return null
+        }
+        try{
+            const decodedToken: any = jwtDecode(token);
+            return decodedToken.user_id
+        } catch (err) {
+            console.log("failed to decode token", err)
+            return null
         }
     };
 
@@ -70,10 +94,11 @@ const CreatePost = () => {
             <h2>Create post</h2>
             <div className={styles.post_submit_group_select}>
                 <select name="group" value={selectedGroup} onChange={(e) => setSelectedGroup(e.target.value)}>
-                    <option value="">select group</option>
-                    {/* add options dinamycally basend on groups that user can choose */}
-                    <option value="group1">Group 1</option>
-                    <option value="group2">Group 2</option>
+                    {groups.map((group)=> (
+                        <option key={group.id} value={group.id}>
+                            r/{group.name}
+                        </option>
+                    ))}
                 </select>
             </div>
             <div className={styles.post_submit_content_type_button}>
