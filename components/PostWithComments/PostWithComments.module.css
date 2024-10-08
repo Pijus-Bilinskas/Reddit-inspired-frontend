@@ -1,5 +1,7 @@
 .Post_comments_main_wrapper{
     background-color: var(--primary-backround-color);
+    width: 60%;
+    margin: auto;
 }
 
 .post_info_card{
@@ -7,7 +9,7 @@
     margin: auto;
     display: flex;
     color: white;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-between;
     margin-bottom: 20px;
     padding: 1.5rem 1rem;
@@ -24,6 +26,69 @@
 .post_info_card p {
     font-size: 20px;
 }
+
+.post_add_comment_text_area {
+    position: relative;
+    width: 73%;
+    transition: 0.3s ease;
+    display: flex;
+    margin: auto;
+    flex-direction: column;
+  }
+  .post_add_comment_text_area input {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    box-sizing: border-box;
+    background-color: var(--primary-backround-color);
+    border: 1px solid var(--secondary-backround-color);
+    height: 40px; 
+    transition:  0.3s ease;
+    border-radius: 4px;
+    color: var(--primary-text-color);
+  }
+  .post_add_comment_text_area.active input {
+    height: 100px; 
+  }
+  .post_add_comment_buttons {
+    position: absolute;
+    bottom: 10px; 
+    right: 10px;
+    display: flex;
+    gap: 10px;
+  }
+  
+  .post_add_comment_buttons button:first-child {
+    padding: 6px 12px;
+    font-size: 15px;
+    cursor: pointer;
+    color: var(--primary-text-color);
+    background-color: var(--secondary-backround-color);
+    border: none;
+    border-radius: 11px;
+  }
+  .post_add_comment_buttons button:first-child:hover {
+    background-color: var(--secondary-backround-color);
+  }
+  .post_add_comment_buttons button:last-child {
+    padding: 6px 12px;
+    font-size: 15px;
+    cursor: pointer;
+    color: var(--primary-text-color);
+    background-color: rgb(1, 124, 1);
+    border: none;
+    border-radius: 11px;
+  }
+  .post_add_comment_buttons button:last-child:hover {
+    background-color: rgb(31, 172, 31);
+  }
+  
+  .post_add_comment_text_area.active {
+    height: 100px; 
+    transition: 0.3s ease;
+    padding-bottom: 5px; 
+  }
+
 
 .answers_padding{
     margin-top: 2rem;
@@ -58,4 +123,20 @@
     text-align: center;
     padding-bottom: 1rem;
     color: white;
+}
+
+.liked_post{
+    color: red
+}
+
+.disliked_post{
+    color: blue;
+}
+
+.active_like{
+    background-color: red;
+}
+
+.active_dislike {
+    background-color: blue;
 }
