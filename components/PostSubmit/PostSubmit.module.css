@@ -1,0 +1,88 @@
+.post_submit_padding{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: auto;;
+}
+
+.post_submit_padding h2 {
+    font-size: 65px;
+    color: var(--primary-text-color);
+}
+
+.post_submit_group_select{
+    padding: 10px;
+}
+.post_submit_group_select select{
+    font-size: 22px;
+    padding: 3px 8px;
+    background-color: var(--secondary-backround-color);
+    color: var(--primary-text-color);
+    cursor: pointer;
+}
+
+.post_submit_content_type_button{
+    padding: 10px;
+}
+.post_submit_content_type_button button{
+    font-size: 18px;
+    padding: 10px 15px;
+    border: none;
+    background-color: var(--primary-backround-color);
+    color: var(--primary-text-color);
+}
+.post_submit_content_type_button button:hover{
+    background-color: var(--secondary-backround-color);
+    cursor: pointer;
+}
+
+.post_submit_post_title{
+    padding: 10px 5px;
+}
+.post_submit_post_title input{
+    padding: 10px 8px;
+    font-size: 20px;
+    background-color: var(--secondary-backround-color);
+    color: var(--primary-text-color);
+    border: none;
+}
+
+.post_submit_content_type_input_area{
+    padding: 5px;
+    width: 15%;
+}
+.post_submit_text_content_type_input{
+    background-color: var(--secondary-backround-color);
+    color: var(--primary-text-color);
+    border: none;
+    font-size: 16px;
+    padding: 6px 5px;
+    width: 100%;
+}
+.post_submit_link_content_type_input{
+    background-color: var(--secondary-backround-color);
+    color: var(--primary-text-color);
+    border: none;
+    font-size: 18px;
+    padding: 6px 5px;
+    width: 100%;
+}
+.post_submit_image_content_type_input{
+    width: 100%;
+    color: var(--primary-text-color);
+    background-color: var(--primary-backround-color);
+    font-size: 15px;
+    padding: 7px 5px;
+}
+.post_submit_post_submition_button{
+    padding: 5px;
+}
+.post_submit_post_submition_button button{
+    padding: 9px 7px;
+    color: var(--primary-text-color);
+    background-color: var(--login-btn);
+    border: none;
+    font-size: 20px;
+    border-radius: 8px;
+}

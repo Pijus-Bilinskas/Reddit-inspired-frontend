@@ -60,3 +60,22 @@
 .group_title_img_container h2{
     margin-left: 50%;
 }
+
+
+
+.group_action_buttons_container button{
+    border: 1px solid var(--secondary-text-color);
+    background-color: var(--primary-backround-color);
+    color: var(--primary-text-color);
+    margin-right: 1rem;
+    padding: 8px;
+    border-radius: 10px;
+    font-size: 22px;
+    cursor: pointer;
+}
+
+.group_action_buttons_container span {
+    font-size: 22px;
+    margin-right: 7px;
+    
+}

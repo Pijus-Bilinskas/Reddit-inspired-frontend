@@ -22,6 +22,10 @@
     margin-bottom: 0;
 }
 
+.post_content_image{
+    max-height: 550px;
+    width: 100%;
+}
 
 .PostCard h2 {
     font-size: 45px;
@@ -38,6 +42,7 @@
 .Reaction_buttons{
     display: flex;
     align-items: center;
+    width: 20%;
     background-color: gray;
 }
 

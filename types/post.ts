@@ -11,7 +11,10 @@ export type PostType = {
     group_id: string;
     user_id: string;
     title: string;
-    content: string;
+    content_type: "text" | "image" | "link";
+    content_text: string;
+    content_image: string;
+    content_link: string;
     created_at: string;
     reactions: ReactionType[];
 }
